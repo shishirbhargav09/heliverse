@@ -46,7 +46,7 @@ const Container = styled.div`
   }
  
   .team_container{
-    width: 80%;
+    width: 90%;
     background-color: aliceblue;
     border-radius: 8px;
     margin: 2rem;

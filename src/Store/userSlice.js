@@ -28,10 +28,16 @@ export const userSlice = createSlice({
       const team = state.team;
       const newMember = action.payload;
       const isExist = state.team.find((item) => {
-        return item.id === newMember.id;
-      });
+        return item.id === newMember.id ;
+    });
+    const isDomainSame = state.team.find((item) => {
+        return item.domain===newMember.domain;
+    });
       if (isExist) {
         toast.error("Already Added To Team");
+      }
+      else if (isDomainSame) {
+        toast.error("Similar Domain Member Already Added")
       } else {
         state.team = [...team, action.payload];
         toast.success("Member Added")

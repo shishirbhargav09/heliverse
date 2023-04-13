@@ -90,6 +90,13 @@ const Container = styled.div`
 
   display: grid;
   grid-template-columns: 1fr 5fr;
+  @media screen and (max-width: 1180px){
+    grid-template-columns: 1fr 3fr;
+  }
+  @media screen and (max-width: 800px){
+    display: flex;
+    flex-direction: column;
+  }
   .right {
     display: flex;
     flex-direction: column;
@@ -109,6 +116,10 @@ const Container = styled.div`
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+    @media screen and (max-width: 490px){
+    width: 90%;
+  }
   }
 
   .search {
@@ -135,14 +146,23 @@ const Container = styled.div`
     flex-direction: column;
     height: 80vh;
     align-items: center;
+    justify-content: center;
     border-radius: 8px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     position: sticky;
     top: 100px;
-    .left_fixed{
-       
+    button{
+        margin: 1rem;
+        margin-top: 2.5rem;
     }
+    .left_fixed{
+
+    }
+    @media screen and (max-width: 800px){
+    position: static;
+    /* width: 70%; */
+  }
   }
 `;

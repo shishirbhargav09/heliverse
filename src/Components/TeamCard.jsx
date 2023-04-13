@@ -37,6 +37,7 @@ const Container = styled.div`
   width: 25rem;
   height: 15rem;
   padding: 0.5rem;
+  word-wrap: break-word;
   margin: 1rem;
   border-radius: 8px;
   display: flex;
