@@ -118,7 +118,8 @@ const Container = styled.div`
     -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 
     @media screen and (max-width: 490px){
-    width: 90%;
+    width: 100%;
+    
   }
   }
 

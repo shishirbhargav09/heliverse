@@ -47,6 +47,10 @@ const Container = styled.div`
   box-shadow: 3px 4px 17px -1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 17px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 4px 17px -1px rgba(0, 0, 0, 0.75);
+  @media screen and (max-width: 450px){
+    height: auto;
+    flex-direction: column;
+  }
   .user_avatar {
     height: 5rem;
     width: 5rem;
