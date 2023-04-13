@@ -45,6 +45,11 @@ const Container = styled.div`
   box-shadow: 3px 4px 17px -1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 17px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 4px 17px -1px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+  @media screen and (max-width: 450px){
+    height: auto;
+    flex-direction: column;
+  }
   .user_avatar {
     height: 5rem;
     width: 5rem;
@@ -69,6 +74,7 @@ const Container = styled.div`
     width: 50%;
     padding: 0.3rem;
     /* background-color: gray; */
+    word-wrap: break-word;
     display: flex;
     flex-direction: column;
     justify-content: center;
