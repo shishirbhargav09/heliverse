@@ -16,7 +16,7 @@ const Card = (props) => {
         <p>{gender}</p>
         <p>{domain}</p>
         <p>{email}</p>
-        <p>{available}</p>
+        <p>{available?`Available` : `Not Available`}</p>
         <br />
         <Button variant="contained" onClick={
          (e) => {
@@ -34,7 +34,7 @@ const Container = styled.div`
   display: flex;
   gap: 2rem;
   width: 20rem;
-  height: 10rem;
+  height: 12rem;
   padding: 0.5rem;
   margin: 0.5rem;
   border-radius: 8px;

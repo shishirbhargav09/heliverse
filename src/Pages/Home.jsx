@@ -142,7 +142,7 @@ const Container = styled.div`
   }
   .left {
     background-color: aliceblue;
-
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     height: 80vh;

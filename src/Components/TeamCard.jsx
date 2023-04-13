@@ -16,7 +16,7 @@ const TeamCard = (props) => {
         <p>{gender}</p>
         <p>{domain}</p>
         <p>{email}</p>
-        <p>{available}</p>
+        <p>{available?`Available` : `Not Available`}</p>
         <br />
         <Button variant="contained" sx={{backgroundColor:"Red",
         color:"white"}} onClick={

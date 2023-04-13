@@ -6,6 +6,7 @@ const initialState = {
   allUsers : [],
   genders: [],
   domains: [],
+  available: ['true','false'],
   team: [],
   
 };
@@ -33,8 +34,12 @@ export const userSlice = createSlice({
     const isDomainSame = state.team.find((item) => {
         return item.domain===newMember.domain;
     });
+    
       if (isExist) {
         toast.error("Already Added To Team");
+      }
+      else if(newMember.available===false){
+        toast.error("Not Available");
       }
       else if (isDomainSame) {
         toast.error("Similar Domain Member Already Added")

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { filterData } from "../Store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
@@ -7,7 +7,8 @@ const Filter = () => {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.user.allUsers);
   const data = useSelector((state) => state.user.users);
-  const { genders, domains } = useSelector((state) => state.user);
+  const { genders, domains, available } = useSelector((state) => state.user);
+  const [users, setUsers] = useState([]);
 
   let genderFilter = [];
   let domainFilter = [];
@@ -17,18 +18,115 @@ const Filter = () => {
     console.log(genderFilter);
     console.log(domainFilter);
     console.log(availableFilter);
-    const genderfilterUsers = allUsers.filter((user) => {
-      return genderFilter.includes(user.gender);
-    });
-    const domainfilterUsers = genderfilterUsers.filter((user) => {
-      return domainFilter.includes(user.domain);
-    });
-    const availablefilterUsers = domainfilterUsers.filter((user) => {
-        return availableFilter.includes(user.available);
+    if (
+      genderFilter.length > 0 &&
+      domainFilter.length > 0 &&
+      availableFilter.length > 0
+    ) {
+      const genderfilterUsers = allUsers.filter((user) => {
+        return genderFilter.includes(user.gender);
       });
 
-    dispatch(filterData(availablefilterUsers));
-    console.log(availablefilterUsers);
+      const domainfilterUsers = genderfilterUsers.filter((user) => {
+        return domainFilter.includes(user.domain);
+      });
+      const availablefilterUsers = domainfilterUsers.filter((user) => {
+        return availableFilter.includes(user.available.toString());
+      });
+
+      dispatch(filterData(availablefilterUsers));
+
+      genderFilter = [];
+      domainFilter = [];
+      availableFilter = [];
+      console.log(availablefilterUsers);
+    } else if ( genderFilter.length > 0 &&
+        domainFilter.length === 0 &&
+        availableFilter.length === 0 ) {
+      const genderfilterUsers = allUsers.filter((user) => {
+        return genderFilter.includes(user.gender);
+      });
+
+      dispatch(filterData(genderfilterUsers));
+
+      genderFilter = [];
+      domainFilter = [];
+      availableFilter = [];
+      console.log(genderfilterUsers);
+    } else if ( genderFilter.length ===0 &&
+        domainFilter.length > 0 &&
+        availableFilter.length === 0) {
+        const domainfilterUsers = allUsers.filter((user) => {
+          return domainFilter.includes(user.domain);
+        });
+  
+        dispatch(filterData(domainfilterUsers));
+  
+        genderFilter = [];
+        domainFilter = [];
+        availableFilter = [];
+        console.log(domainfilterUsers);
+      }
+     else if ( genderFilter.length > 0 &&
+        domainFilter.length > 0 &&
+        availableFilter.length === 0) {
+        const genderfilterUsers = allUsers.filter((user) => {
+            return genderFilter.includes(user.gender);
+          });
+    
+          const domainfilterUsers = genderfilterUsers.filter((user) => {
+            return domainFilter.includes(user.domain);
+          });
+
+      console.log(domainfilterUsers);
+      dispatch(filterData(domainfilterUsers));
+      genderFilter = [];
+      domainFilter = [];
+      availableFilter = [];
+    } else if (
+      domainFilter.length > 0 &&
+      genderFilter.length === 0 &&
+      availableFilter.length === 0
+    ) {
+      const domainfilterUsers = allUsers.filter((user) => {
+        return domainFilter.includes(user.domain);
+      });
+
+      console.log(domainfilterUsers);
+      dispatch(filterData(domainfilterUsers));
+      genderFilter = [];
+      domainFilter = [];
+      availableFilter = [];
+    }
+    else if (
+        domainFilter.length > 0 &&
+        genderFilter.length === 0 &&
+        availableFilter.length > 0
+      ) {
+        const domainfilterUsers = allUsers.filter((user) => {
+          return domainFilter.includes(user.domain);
+        });
+        const availablefilterUsers = domainfilterUsers.filter((user) => {
+            return availableFilter.includes(user.available.toString());
+          });
+  
+        console.log(availablefilterUsers);
+        dispatch(filterData(availablefilterUsers));
+        genderFilter = [];
+        domainFilter = [];
+        availableFilter = [];
+      }
+       else {
+      const availablefilterUsers = allUsers.filter((user) => {
+        return availableFilter.includes(user.available.toString());
+      });
+
+      console.log(availablefilterUsers);
+      dispatch(filterData(availablefilterUsers));
+      genderFilter = [];
+      domainFilter = [];
+      availableFilter = [];
+    }
   };
 
   return (
@@ -105,53 +203,31 @@ const Filter = () => {
         <br />
         <p>Availaible :</p>
         <br />
+        {
+            available.map((avl) => {
+                return <div key={Math.random()}>
+                    <input type="checkbox" name={avl} id={avl} value={avl}
+                     onChange={(e) => {
+                        console.log(availableFilter);
+                        if (!availableFilter.includes(e.target.value)) {
+                          availableFilter.push(e.target.value);
+                        } else {
+                          const index = availableFilter.indexOf(e.target.value);
+                          availableFilter.splice(index, 1);
+                          //   console.log(availableFilter);
+                        }
+                        const filterusers = data.filter((user) => {
+                          return availableFilter.includes(user.domain);
+                        });
+                        // dispatch(filterData(filterusers))
+                        // console.log(filterusers)
+                      }}
+                    />
+                    <label htmlFor={avl}>{avl}</label>
+                </div>
+            })
+        }
 
-        <input
-          type="checkbox"
-          name="true"
-          id="true"
-          value="true"
-          onChange={(e) => {
-            console.log(availableFilter);
-            if (!availableFilter.includes(e.target.value)) {
-              availableFilter.push(e.target.value);
-            } else {
-              const index = availableFilter.indexOf(e.target.value);
-              availableFilter.splice(index, 1);
-              //   console.log(availableFilter);
-            }
-
-            const filterusers = data.filter((user) => {
-              return availableFilter.includes(user.domain);
-            });
-            // dispatch(filterData(filterusers))
-            // console.log(filterusers)
-          }}
-        />
-        <label htmlFor="true">True</label>
-        <br />
-        <input
-          type="checkbox"
-          name="false"
-          id="false"
-          value="false"
-          onChange={(e) => {
-            console.log(availableFilter);
-            if (!availableFilter.includes(e.target.value)) {
-              availableFilter.push(e.target.value);
-            } else {
-              const index = availableFilter.indexOf(e.target.value);
-              availableFilter.splice(index, 1);
-              //   console.log(availableFilter);
-            }
-            const filterusers = data.filter((user) => {
-              return availableFilter.includes(user.domain);
-            });
-            // dispatch(filterData(filterusers))
-            // console.log(filterusers)
-          }}
-        />
-        <label htmlFor="false">False</label>
         <br />
         <Button variant="contained" onClick={submitFilterHandler}>
           Apply Filters
