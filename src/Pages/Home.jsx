@@ -158,8 +158,8 @@ const Container = styled.div`
         margin: 1rem;
         margin-top: 2.5rem;
     }
-    .left_fixed{
-
+    input{
+        margin-right: 5px;
     }
     @media screen and (max-width: 800px){
     position: static;

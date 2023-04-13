@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { filterData } from "../Store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
@@ -6,10 +6,7 @@ import { Button } from "@mui/material";
 const Filter = () => {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.user.allUsers);
-  const data = useSelector((state) => state.user.users);
   const { genders, domains, available } = useSelector((state) => state.user);
-  const [users, setUsers] = useState([]);
-
   let genderFilter = [];
   let domainFilter = [];
   let availableFilter = [];
@@ -132,7 +129,7 @@ const Filter = () => {
   return (
     <div className="left">
       <div className="left_fixed">
-        <p>Genders :</p>
+        <h4>Gender :</h4>
         <br />
         {genders.map((gender) => {
           return (
@@ -166,7 +163,7 @@ const Filter = () => {
         })}
 
         <br />
-        <p>Domain : </p>
+        <h4>Domain : </h4>
         <br />
         {domains.map((domain) => {
           return (
@@ -201,7 +198,7 @@ const Filter = () => {
           );
         })}
         <br />
-        <p>Availaible :</p>
+        <h3>Availaible :</h3>
         <br />
         {
             available.map((avl) => {
@@ -216,9 +213,7 @@ const Filter = () => {
                           availableFilter.splice(index, 1);
                           //   console.log(availableFilter);
                         }
-                        const filterusers = data.filter((user) => {
-                          return availableFilter.includes(user.domain);
-                        });
+                        
                         // dispatch(filterData(filterusers))
                         // console.log(filterusers)
                       }}
