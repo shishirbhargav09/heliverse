@@ -10,8 +10,6 @@ const Home = () => {
 
   const data = useSelector((state) => state.user.users);
   
-  
-  
 
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,11 +25,6 @@ const Home = () => {
 
   //Searching
   const [searchUser, setSearchUser] = useState("");
-//   const [filteredUsers, setFilteredUsers] = useState([]);
-
-  
-
-
 
   return (
     <Container>
