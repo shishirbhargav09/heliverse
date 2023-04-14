@@ -112,6 +112,23 @@ const Filter = () => {
         genderFilter = [];
         domainFilter = [];
         availableFilter = [];
+      }else if (
+        domainFilter.length === 0 &&
+        genderFilter.length > 0 &&
+        availableFilter.length > 0
+      ) {
+        const genderfilterUsers = allUsers.filter((user) => {
+          return genderFilter.includes(user.gender);
+        });
+        const availablefilterUsers = genderfilterUsers.filter((user) => {
+            return availableFilter.includes(user.available.toString());
+          });
+  
+        console.log(availablefilterUsers);
+        dispatch(filterData(availablefilterUsers));
+        genderFilter = [];
+        domainFilter = [];
+        availableFilter = [];
       }
        else {
       const availablefilterUsers = allUsers.filter((user) => {
